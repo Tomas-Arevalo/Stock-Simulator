@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Portfolio
+{% endblock %}
+
+
+{% block main %}
+
+<table class="table table-striped">
+  <thead>
+    <th>Symbol</th>
+    <th>Shares</th>
+    <th>Price</th>
+    <th>Total</th>
+  </thead>
+  <tbody>
+    {% for sym in stocks %}
+    <tr>
+      {% set symbol = sym.stock %}
+      <td>{{symbol}}</td>
+      <td>{{sym.shares}}</td>
+      <td>{{prices[symbol] }}</td>
+      <td>{{(sym.shares * prices[symbol]) | usd}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="3">CASH</td>
+      <td>{{user_cash | usd}}</td>
+    </tr>
+  <tfoot>
+    <td colspan="3">Total</td>
+    <td>{{total_cash | usd}}</td>
+  </tfoot>
+  </tbody>
+</table>
+{% endblock %}
